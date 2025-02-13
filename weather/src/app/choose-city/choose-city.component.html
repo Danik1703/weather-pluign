@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="form-group">
+    <label for="cityInput">Введите название города:</label>
+    <input type="text" class="form-control" id="cityInput" name="city" [(ngModel)]="cityName" required>
+  </div>
+  
+  <div class="button-group">
+    <button type="button" class="btn btn-primary" (click)="searchWeather()">Получить погоду</button>
+    <button type="button" class="btn btn-secondary" (click)="getWeatherInMyCity()">Получить погоду в моем городе</button>
+  </div>
+
+  <div class="form-group">
+    <label>Выберите отображение:</label>
+    <select [(ngModel)]="view" class="form-control" (change)="onViewChange()">
+      <option value="today">Текущая погода</option>
+      <option value="5days">Прогноз на 5 дней</option>
+    </select>    
+  </div>
+  
+  <app-output-weather [weatherData]="weatherData" [errorMessage]="errorMessage" [view]="view"></app-output-weather>
+</div>
+
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

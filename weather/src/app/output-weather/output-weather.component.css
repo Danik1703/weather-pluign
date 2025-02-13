@@ -1,0 +1,63 @@
+.forecast-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.forecast-cards {
+  width: 300px; 
+  box-sizing: border-box;
+}
+
+.today-weather-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.weather-icon img {
+  width: 100px;
+  height: 80px;
+}
+
+@media (max-width: 1200px) {
+  .forecast-cards {
+    width: 300px; 
+  }
+}
+
+@media (max-width: 900px) {
+  .forecast-cards {
+    width: 300px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .forecast-cards {
+    width: 300px; 
+  }
+}
+
+@media (max-width: 600px) {
+  .forecast-cards {
+    width: 300px; 
+  }
+}

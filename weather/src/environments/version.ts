@@ -1,0 +1,13 @@
+export const PLUGIN_VERSION = {
+    "dirty": true,
+    "raw": "d817d44-dirty",
+    "hash": "d817d44",
+    "distance": null,
+    "tag": null,
+    "semver": null,
+    "suffix": "d817d44-dirty",
+    "semverString": null,
+    "name": "weather-plugin",
+    "version": "1.2.1",
+    "main": "main.js"
+};

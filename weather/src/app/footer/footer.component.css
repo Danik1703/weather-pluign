@@ -1,0 +1,32 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #444;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 1rem;
+  z-index: 2;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer p {
+  margin: 5px 0;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer p:hover {
+  transform: scale(1.05);
+}
+
+.footer .footer-text {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.footer .date {
+  font-style: italic;
+  font-size: 0.9rem;
+}
