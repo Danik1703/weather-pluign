@@ -1,5 +1,5 @@
 .container {
-  max-width: 70%;
+  max-width: 100%; /* Увеличиваем ширину контейнера */
   margin: 0 auto;
   padding: 25px;
   border-radius: 8px;
@@ -8,12 +8,16 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
+.weather-selection {
   margin-bottom: 20px;
 }
 
-.label {
-  font-weight: bold;
+.weather-display {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
 }
 
 .input-group, .button-group {
@@ -38,10 +42,6 @@
   border: none;
 }
 
-.btn:hover {
-  opacity: 0.8;
-}
-
 .error-message {
   color: #e74c3c;
   font-size: 14px;
@@ -58,9 +58,136 @@ select:focus, input:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
+/* Контейнер для карточек */
+.weather-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Расстояние между карточками */
+  justify-content: center; /* Центрируем карточки */
+  align-items: flex-start; /* Выравнивание по верхнему краю */
+}
+
+/* Карточки */
+.card {
+  flex: 1 1 calc(25% - 10px); /* Каждая карточка занимает 25% ширины (4 в ряд) */
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 12px; /* Уменьшаем размер текста */
+  margin-bottom: 10px; /* Отступ снизу для карточек */
+}
+
+.card-title {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.weather-icon img {
+  width: 50px; /* Уменьшаем размер иконки погоды */
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.card-text {
+  font-size: 12px;
+}
+
+@media (max-width: 1200px) {
+  .card {
+    flex: 1 1 calc(25% - 10px); /* 4 карточки на больших экранах */
+  }
+}
+
+@media (max-width: 992px) {
+  .card {
+    flex: 1 1 calc(33.33% - 10px); /* 3 карточки на экранах поменьше */
+  }
+}
+
 @media (max-width: 768px) {
-  .input-group, .button-group {
-    flex-direction: column;
-    align-items: stretch;
+  .card {
+    flex: 1 1 calc(50% - 10px); /* 2 карточки на экранах */
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%; /* Одна карточка на маленьких экранах */
+  }
+}
+
+.weather-card-container, .forecast-card-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.forecast-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.forecast-cards {
+  width: 300px; 
+  box-sizing: border-box;
+}
+
+.today-weather-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.weather-icon img {
+  width: 100px;
+  height: 80px;
+}
+
+@media (max-width: 1200px) {
+  .forecast-cards {
+    width: 300px; 
+  }
+}
+
+@media (max-width: 900px) {
+  .forecast-cards {
+    width: 300px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .forecast-cards {
+    width: 300px; 
+  }
+}
+
+@media (max-width: 600px) {
+  .forecast-cards {
+    width: 300px; 
   }
 }

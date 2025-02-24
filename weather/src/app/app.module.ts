@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ChooseCityComponent } from './choose-city/choose-city.component';
 import { OutputWeatherComponent } from './output-weather/output-weather.component';
 import { BannerComponent } from './banner/banner.component';
+import { MefDevCardModule } from '@natec/mef-dev-ui-kit';
 
 import { WeatherService } from './weather.service';
 
@@ -27,7 +28,8 @@ import { WeatherService } from './weather.service';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MefDevCardModule
   ],
 
   providers: [WeatherService],

@@ -1,3 +1,11 @@
+.weather-card-container, .forecast-card-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
 .forecast-cards-container {
   display: flex;
   flex-wrap: wrap;

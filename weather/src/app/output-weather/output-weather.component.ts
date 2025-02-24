@@ -31,7 +31,6 @@ export class OutputWeatherComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
   
-
   ngOnDestroy() {
     if (this.weatherSubscription) {
       this.weatherSubscription.unsubscribe();
@@ -50,7 +49,6 @@ export class OutputWeatherComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
   
-
   getCurrentWeather() {
     if (!this.weatherData?.city?.name) {
       return;
@@ -100,7 +98,6 @@ export class OutputWeatherComponent implements OnInit, OnDestroy, OnChanges {
     }
     return this.weatherData.list[0]; 
   }
-  
 
   groupByDate(weatherData: WeatherData | null): { date: Date, forecasts: any[] }[] {
     if (!weatherData || !weatherData.list) {
@@ -123,7 +120,7 @@ export class OutputWeatherComponent implements OnInit, OnDestroy, OnChanges {
       groupedByDate[dateString].forecasts.push(forecast);
     });
 
-    return Object.values(groupedByDate);
+    return Object.values(groupedByDate).slice(0, 3);
   }
 
   getWeatherIcon(description: string): string {

@@ -1,33 +1,39 @@
-<div *ngIf="view === 'today' && weatherData">
-  <h2 class="section-title">Текущая погода в {{ weatherData.city.name }}</h2>
+<div class="weather-display">
+  <div *ngIf="view === 'today' && weatherData">
+    <h2 class="section-title">Текущая погода в {{ weatherData.city.name }}</h2>
 
-  <div *ngIf="getTodayWeather() as todayWeather" class="today-weather-container">
-    <div class="card">
-      <h3 class="card-title">Температура: {{ getRealTimeTemperature(todayWeather.main.temp) | number:'1.0-0' }} °C</h3>
-      <div class="weather-icon">
-        <img [src]="getWeatherIcon(todayWeather.weather[0].description)" alt="Weather Icon" />
+    <div *ngIf="getTodayWeather() as todayWeather" class="today-weather-container">
+      <div class="weather-card-container">
+        <div class="card">
+          <h3 class="card-title">Температура: {{ getRealTimeTemperature(todayWeather.main.temp) | number:'1.0-0' }} °C</h3>
+          <div class="weather-icon">
+            <img [src]="getWeatherIcon(todayWeather.weather[0].description)" alt="Weather Icon" />
+          </div>
+          <p class="card-text">Погода: {{ todayWeather.weather[0].description }}</p>
+          <p class="card-text">Влажность: {{ todayWeather.main.humidity }}%</p>
+          <p class="card-text">Ветер: {{ todayWeather.wind.speed }} м/с</p>
+        </div>
       </div>
-      <p class="card-text">Погода: {{ todayWeather.weather[0].description }}</p>
-      <p class="card-text">Влажность: {{ todayWeather.main.humidity }}%</p>
-      <p class="card-text">Ветер: {{ todayWeather.wind.speed }} м/с</p>
     </div>
   </div>
-</div>
 
-<div *ngIf="view === '5days' && weatherData">
-  <h2 class="section-title">Прогноз погоды на 5 дней в {{ weatherData.city.name }}</h2>
-  <div class="forecast-cards-container">
-    <div *ngFor="let group of groupByDate(weatherData)" class="forecast-cards">
-      <h3 class="forecast-date">{{ group.date | date:'fullDate' }}</h3>
-      <div *ngFor="let forecast of group.forecasts" class="card">
-        <p class="card-text">Время: {{ forecast.dt_txt.split(' ')[1] }}</p>
-        <div class="weather-icon">
-          <img [src]="getWeatherIcon(forecast.weather[0].description)" alt="Weather Icon" />
+  <div *ngIf="view === '5days' && weatherData">
+    <h2 class="section-title">Прогноз погоды на 3 дня в {{ weatherData.city.name }}</h2>
+    <div class="forecast-cards-container">
+      <div *ngFor="let group of groupByDate(weatherData)" class="forecast-cards">
+        <h3 class="forecast-date">{{ group.date | date:'fullDate' }}</h3>
+        <div class="forecast-card-container">
+          <div *ngFor="let forecast of group.forecasts" class="card">
+            <p class="card-text">Время: {{ forecast.dt_txt.split(' ')[1] }}</p>
+            <div class="weather-icon">
+              <img [src]="getWeatherIcon(forecast.weather[0].description)" alt="Weather Icon" />
+            </div>
+            <p class="card-text">Температура: {{ getRealTimeTemperature(forecast.main.temp) | number:'1.0-0' }} °C</p>
+            <p class="card-text">Погода: {{ forecast.weather[0].description }}</p>
+            <p class="card-text">Влажность: {{ forecast.main.humidity }}%</p>
+            <p class="card-text">Ветер: {{ forecast.wind.speed }} м/с</p>
+          </div>
         </div>
-        <p class="card-text">Температура: {{ getRealTimeTemperature(forecast.main.temp) | number:'1.0-0' }} °C</p>
-        <p class="card-text">Погода: {{ forecast.weather[0].description }}</p>
-        <p class="card-text">Влажность: {{ forecast.main.humidity }}%</p>
-        <p class="card-text">Ветер: {{ forecast.wind.speed }} м/с</p>
       </div>
     </div>
   </div>

@@ -99,7 +99,7 @@ export class ChooseCityComponent {
                 console.error(error);
               }
             );
-        } else if (this.view === '5days') {
+        } else if (this.view === '3days') {
           this.weatherService.getWeatherForecastByCoordinates(latitude, longitude)
             .subscribe(
               (data: WeatherData) => {
