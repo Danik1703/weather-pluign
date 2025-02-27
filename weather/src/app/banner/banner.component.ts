@@ -25,17 +25,10 @@ export class BannerComponent implements OnInit, OnDestroy {
   }
 
   nextSlide() {
-    this.slideIndex++;
-    if (this.slideIndex > 7) {
-      this.slideIndex = 1;
-    }
+    this.slideIndex = (this.slideIndex % 7) + 1;
   }
 
-  currentSlide(event: Event, index: number) {
-    clearInterval(this.timer);
-    this.slideIndex = index;
-    this.startSlider();
-  }
+
 
   getAsset(path: string): string {
     return `assets${path}`;

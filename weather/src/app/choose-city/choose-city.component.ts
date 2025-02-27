@@ -12,12 +12,17 @@ export class ChooseCityComponent {
   weatherData: WeatherData | null = null;
   errorMessage: string = '';
   view: string = 'today';
-
+  loadingMessage: string = '';
+  loading: boolean = false;
   constructor(private weatherService: WeatherService) {}
 
   searchWeather() {
+    this.loadingMessage = 'Погода обновляется...'; 
+    this.loading = true;
     if (this.cityName.trim() === '') {
       this.errorMessage = 'Введите название города';
+      this.loading = false;
+      this.loadingMessage = '';
       return;
     }
     this.errorMessage = '';
@@ -42,26 +47,30 @@ export class ChooseCityComponent {
       .subscribe(
         (data: any) => {
           this.weatherData = {
-            city: { 
-              name: this.cityName, 
-              country: data.sys?.country || '' 
+            city: {
+              name: this.cityName,
+              country: data.sys?.country || ''
             },
             list: [{
               dt_txt: new Date().toISOString(),
-              main: { 
-                temp: data.main?.temp || 0, 
-                humidity: data.main?.humidity || 0 
+              main: {
+                temp: data.main?.temp || 0,
+                humidity: data.main?.humidity || 0
               },
               weather: data.weather || [],
-              wind: { 
-                speed: data.wind?.speed || 0 
+              wind: {
+                speed: data.wind?.speed || 0
               }
             }]
           } as any;
           this.errorMessage = '';
+          this.loading = false;
+          this.loadingMessage = '';  
         },
         (error: any) => {
           this.errorMessage = 'Не удалось найти информацию о погоде для указанного города';
+          this.loading = false;
+          this.loadingMessage = '';  
           console.error(error);
         }
       );

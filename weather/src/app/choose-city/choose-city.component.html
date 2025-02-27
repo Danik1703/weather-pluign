@@ -1,11 +1,14 @@
+<div *ngIf="loadingMessage" class="loading-message">
+  <p>{{ loadingMessage }}</p>
+</div>
+
 <div class="container">
-  <!-- Контейнер для выбора города и настроек -->
   <div class="weather-selection">
     <div class="form-group">
       <label for="cityInput">Введите название города:</label>
       <input type="text" class="form-control" id="cityInput" name="city" [(ngModel)]="cityName" required>
     </div>
-    
+
     <div class="button-group">
       <button type="button" class="btn btn-primary" (click)="searchWeather()">Получить погоду</button>
       <button type="button" class="btn btn-secondary" (click)="getWeatherInMyCity()">Получить погоду в моем городе</button>
@@ -16,7 +19,7 @@
       <select [(ngModel)]="view" class="form-control" (change)="onViewChange()">
         <option value="today">Текущая погода</option>
         <option value="5days">Прогноз на 3 дня</option>
-      </select>    
+      </select>
     </div>
   </div>
 

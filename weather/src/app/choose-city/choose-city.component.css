@@ -1,5 +1,5 @@
 .container {
-  max-width: 100%; /* Увеличиваем ширину контейнера */
+  max-width: 100%;
   margin: 0 auto;
   padding: 25px;
   border-radius: 8px;
@@ -58,18 +58,16 @@ select:focus, input:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Контейнер для карточек */
 .weather-card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Расстояние между карточками */
-  justify-content: center; /* Центрируем карточки */
-  align-items: flex-start; /* Выравнивание по верхнему краю */
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* Карточки */
 .card {
-  flex: 1 1 calc(25% - 10px); /* Каждая карточка занимает 25% ширины (4 в ряд) */
+  flex: 1 1 calc(25% - 10px);
   box-sizing: border-box;
   padding: 10px;
   background-color: #fff;
@@ -77,8 +75,8 @@ select:focus, input:focus {
   border: 1px solid #ddd;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-size: 12px; /* Уменьшаем размер текста */
-  margin-bottom: 10px; /* Отступ снизу для карточек */
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 
 .card-title {
@@ -87,7 +85,7 @@ select:focus, input:focus {
 }
 
 .weather-icon img {
-  width: 50px; /* Уменьшаем размер иконки погоды */
+  width: 50px;
   height: 50px;
   margin-bottom: 5px;
 }
@@ -98,25 +96,25 @@ select:focus, input:focus {
 
 @media (max-width: 1200px) {
   .card {
-    flex: 1 1 calc(25% - 10px); /* 4 карточки на больших экранах */
+    flex: 1 1 calc(25% - 10px);
   }
 }
 
 @media (max-width: 992px) {
   .card {
-    flex: 1 1 calc(33.33% - 10px); /* 3 карточки на экранах поменьше */
+    flex: 1 1 calc(33.33% - 10px);
   }
 }
 
 @media (max-width: 768px) {
   .card {
-    flex: 1 1 calc(50% - 10px); /* 2 карточки на экранах */
+    flex: 1 1 calc(50% - 10px);
   }
 }
 
 @media (max-width: 480px) {
   .card {
-    flex: 1 1 100%; /* Одна карточка на маленьких экранах */
+    flex: 1 1 100%;
   }
 }
 
@@ -137,7 +135,7 @@ select:focus, input:focus {
 }
 
 .forecast-cards {
-  width: 300px; 
+  width: 300px;
   box-sizing: border-box;
 }
 
@@ -170,24 +168,51 @@ select:focus, input:focus {
 
 @media (max-width: 1200px) {
   .forecast-cards {
-    width: 300px; 
+    width: 300px;
   }
 }
 
 @media (max-width: 900px) {
   .forecast-cards {
-    width: 300px; 
+    width: 300px;
   }
 }
 
 @media (max-width: 768px) {
   .forecast-cards {
-    width: 300px; 
+    width: 300px;
   }
 }
 
 @media (max-width: 600px) {
   .forecast-cards {
-    width: 300px; 
+    width: 300px;
   }
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 18px;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.loading-message p {
+  margin: 0;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.25em;
+  margin-top: 10px;
+}
+
+.loading-message {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.loading-message.ng-leave {
+  opacity: 0;
 }
