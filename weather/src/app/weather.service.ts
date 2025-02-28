@@ -7,7 +7,7 @@ import { WeatherData } from './weather-data.model';
   providedIn: 'root'
 })
 export class WeatherService {
-  private apiKey = '1b2e397bc6da86c01f1e9edb5b8b6c03'; // Your API key
+  private apiKey = '1b2e397bc6da86c01f1e9edb5b8b6c03'; 
   private weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
   private forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
 
@@ -32,8 +32,5 @@ export class WeatherService {
     const url = `${this.forecastApiUrl}?lat=${lat}&lon=${lon}&appid=${this.apiKey}`;
     return this.http.get<WeatherData>(url);
   }
-  getWeatherHourly(cityName: string) {
-    const url = `API_URL/forecast?city=${cityName}&hourly=true`; // Замените на реальный API-URL и параметр для получения почасовых данных
-    return this.http.get<WeatherData>(url);
-  }
+
 }

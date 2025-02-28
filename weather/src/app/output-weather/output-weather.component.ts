@@ -61,7 +61,7 @@ export class OutputWeatherComponent implements OnInit, OnDestroy, OnChanges {
           this.errorMessage = '';
         },
         (error: any) => {
-          this.errorMessage = 'Не удалось найти информацию о погоде для указанного города';
+          this.errorMessage = 'Не вдалося знайти інформацію про погоду для вказаного міста';
           console.error(error);
         }
       );
@@ -79,7 +79,7 @@ export class OutputWeatherComponent implements OnInit, OnDestroy, OnChanges {
           this.errorMessage = '';
         },
         (error: any) => {
-          this.errorMessage = 'Не удалось найти информацию о погоде для указанного города';
+          this.errorMessage = 'Не вдалося знайти інформацію про погоду для вказаного міста';
           console.error(error);
         }
       );

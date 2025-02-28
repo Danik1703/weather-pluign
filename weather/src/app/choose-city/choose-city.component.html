@@ -5,20 +5,20 @@
 <div class="container">
   <div class="weather-selection">
     <div class="form-group">
-      <label for="cityInput">Введите название города:</label>
+      <label for="cityInput">Введіть назву міста:</label>
       <input type="text" class="form-control" id="cityInput" name="city" [(ngModel)]="cityName" required>
     </div>
 
     <div class="button-group">
-      <button type="button" class="btn btn-primary" (click)="searchWeather()">Получить погоду</button>
-      <button type="button" class="btn btn-secondary" (click)="getWeatherInMyCity()">Получить погоду в моем городе</button>
+      <button type="button" class="btn btn-primary" (click)="searchWeather()">Отримати погоду</button>
+      <button type="button" class="btn btn-secondary" (click)="getWeatherInMyCity()">Отримати погоду у моєму місті</button>
     </div>
 
     <div class="form-group">
-      <label>Выберите отображение:</label>
+      <label>Оберіть відображення:</label>
       <select [(ngModel)]="view" class="form-control" (change)="onViewChange()">
-        <option value="today">Текущая погода</option>
-        <option value="5days">Прогноз на 3 дня</option>
+        <option value="today">Поточна погода</option>
+        <option value="5days">Прогноз на 3 дні</option>
       </select>
     </div>
   </div>

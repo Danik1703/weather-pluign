@@ -17,17 +17,26 @@ export class ChooseCityComponent {
   constructor(private weatherService: WeatherService) {}
 
   searchWeather() {
-    this.loadingMessage = 'Погода обновляется...'; 
-    this.loading = true;
     if (this.cityName.trim() === '') {
-      this.errorMessage = 'Введите название города';
-      this.loading = false;
-      this.loadingMessage = '';
+      this.errorMessage = 'Введіть назву міста';
       return;
     }
-    this.errorMessage = '';
-    this.view = 'today';
-    this.loadWeatherData();
+    this.loadingMessage = 'Оновлення погоди...';
+    this.loading = true;
+    this.weatherData = null;  
+    this.weatherService.getCurrentWeather(this.cityName)
+      .subscribe(
+        (data: WeatherData) => {
+          this.weatherData = data;
+          this.loading = false;
+          this.errorMessage = '';
+        },
+        (error: any) => {
+          this.errorMessage = 'Не вдалося знайти погоду для цього міста';
+          this.loading = false;
+          console.error(error);
+        }
+      );
   }
   
   loadWeatherData() {
@@ -68,7 +77,7 @@ export class ChooseCityComponent {
           this.loadingMessage = '';  
         },
         (error: any) => {
-          this.errorMessage = 'Не удалось найти информацию о погоде для указанного города';
+          this.errorMessage = 'Не вдалося знайти інформацію про погоду для зазначеного міста';
           this.loading = false;
           this.loadingMessage = '';  
           console.error(error);
@@ -84,7 +93,7 @@ export class ChooseCityComponent {
           this.errorMessage = '';
         },
         (error: any) => {
-          this.errorMessage = 'Не удалось найти информацию о погоде для указанного города';
+          this.errorMessage = 'Не вдалося знайти інформацію про погоду для зазначеного міста';
           console.error(error);
         }
       );
@@ -104,11 +113,11 @@ export class ChooseCityComponent {
                 this.errorMessage = '';
               },
               (error: any) => {
-                this.errorMessage = 'Не удалось получить информацию о погоде для вашего местоположения';
+                this.errorMessage = 'Не вдалося отримати інформацію про погоду для вашого місцезнаходження';
                 console.error(error);
               }
             );
-        } else if (this.view === '3days') {
+        } else if (this.view === '5days') {
           this.weatherService.getWeatherForecastByCoordinates(latitude, longitude)
             .subscribe(
               (data: WeatherData) => {
@@ -116,17 +125,17 @@ export class ChooseCityComponent {
                 this.errorMessage = '';
               },
               (error: any) => {
-                this.errorMessage = 'Не удалось получить информацию о погоде для вашего местоположения';
+                this.errorMessage = 'Не вдалося отримати інформацію про погоду для вашого місцезнаходження';
                 console.error(error);
               }
             );
-        }
+        }        
       }, (error) => {
-        this.errorMessage = 'Не удалось получить ваше местоположение';
+        this.errorMessage = 'Не вдалося отримати ваше місцезнаходження';
         console.error(error);
       });
     } else {
-      this.errorMessage = 'Геолокация не поддерживается этим браузером.';
+      this.errorMessage = 'Геолокація не підтримується цим браузером.';
     }
   }
 }
