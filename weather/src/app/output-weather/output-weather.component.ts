@@ -8,119 +8,42 @@ import { WeatherService } from '../weather.service';
   templateUrl: './output-weather.component.html',
   styleUrls: ['./output-weather.component.css']
 })
-export class OutputWeatherComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() weatherData: WeatherData | null = null;
+export class OutputWeatherComponent implements OnChanges {
+  @Input() weatherData: any;
+  @Input() view: string = 'today';
   @Input() errorMessage: string = '';
-  @Input() view: string = 'today'; 
+
   cityInput: string = '';
 
-  private weatherSubscription: Subscription | undefined;
 
-  constructor(private weatherService: WeatherService) {}
+  todayWeather: any;
 
-  ngOnInit() {
-    this.loadData();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['view']) {
-      this.loadData(); 
-    }
-    if (changes['weatherData'] && !changes['weatherData'].firstChange) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['view'] || changes['weatherData']) {
       this.loadData();
     }
   }
-  
-  ngOnDestroy() {
-    if (this.weatherSubscription) {
-      this.weatherSubscription.unsubscribe();
-    }
-  }
 
-  loadData() {
-    if (!this.cityInput) {
-      return;
-    }
-  
+  loadData(): void {
     if (this.view === 'today') {
-      this.getCurrentWeather();
-    } else {
-      this.getWeatherForecast();
+      this.todayWeather = this.getTodayWeather();
     }
-  }
-  
-  getCurrentWeather() {
-    if (!this.weatherData?.city?.name) {
-      return;
-    }
-    
-    this.weatherService.getCurrentWeather(this.weatherData.city.name)
-      .subscribe(
-        (data: WeatherData) => {
-          this.weatherData = data;
-          this.errorMessage = '';
-        },
-        (error: any) => {
-          this.errorMessage = 'Не вдалося знайти інформацію про погоду для вказаного міста';
-          console.error(error);
-        }
-      );
-  }
-
-  getWeatherForecast() {
-    if (!this.weatherData?.city?.name) {
-      return;
-    }
-
-    this.weatherService.getWeatherForecast(this.weatherData.city.name)
-      .subscribe(
-        (data: WeatherData) => {
-          this.weatherData = data;
-          this.errorMessage = '';
-        },
-        (error: any) => {
-          this.errorMessage = 'Не вдалося знайти інформацію про погоду для вказаного міста';
-          console.error(error);
-        }
-      );
-  }
-
-  getRealTimeTemperature(kelvinTemp: number | undefined): number {
-    if (kelvinTemp === undefined) {
-      return 0;
-    }
-    return kelvinTemp - 273.15;
   }
 
   getTodayWeather(): any {
-    if (!this.weatherData || !this.weatherData.list || this.weatherData.list.length === 0) {
-      return null;
-    }
-    return this.weatherData.list[0]; 
+    if (!this.weatherData?.list?.length) return null;
+  
+    const now = new Date().getTime();
+  
+    return this.weatherData.list.reduce((closest: any, current: any) => {
+      const currentTime = new Date(current.dt_txt).getTime();
+      const closestTime = new Date(closest.dt_txt).getTime();
+      return Math.abs(currentTime - now) < Math.abs(closestTime - now) ? current : closest;
+    });
   }
 
-  groupByDate(weatherData: WeatherData | null): { date: Date, forecasts: any[] }[] {
-    if (!weatherData || !weatherData.list) {
-      return [];
-    }
-
-    const groupedByDate: { [key: string]: { date: Date, forecasts: any[] } } = {};
-
-    weatherData.list.forEach(forecast => {
-      const date = new Date(forecast.dt_txt.split(' ')[0]);
-      const dateString = date.toDateString();
-
-      if (!groupedByDate[dateString]) {
-        groupedByDate[dateString] = {
-          date: date,
-          forecasts: []
-        };
-      }
-
-      groupedByDate[dateString].forecasts.push(forecast);
-    });
-
-    return Object.values(groupedByDate).slice(0, 3);
+  getRealTimeTemperature(temp: number): number {
+    return temp - 273.15; 
   }
 
   getWeatherIcon(description: string): string {
@@ -136,6 +59,18 @@ export class OutputWeatherComponent implements OnInit, OnDestroy, OnChanges {
       return 'assets/cloud.png'; 
     }
   }
+
+  groupByDate(weatherData: any): any[] {
+    if (!weatherData?.list) return [];
+    const groups: { [key: string]: any[] } = {};
+    for (const item of weatherData.list) {
+      const date = item.dt_txt.split(' ')[0];
+      if (!groups[date]) groups[date] = [];
+      groups[date].push(item);
+    }
+    return Object.keys(groups).map(date => ({ date, forecasts: groups[date] }));
+  }
+
 
   onCitySearch() {
     if (this.cityInput) {

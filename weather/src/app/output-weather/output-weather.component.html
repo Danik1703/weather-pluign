@@ -1,8 +1,8 @@
 <div class="weather-display">
-  <div *ngIf="view === 'today' && weatherData?.city?.name">
+  <div *ngIf="view === 'today' && weatherData?.city?.name && todayWeather">
     <h2 class="section-title">Поточна погода у {{ weatherData?.city?.name }}</h2>
 
-    <div *ngIf="getTodayWeather() as todayWeather" class="today-weather-container">
+    <div class="today-weather-container">
       <div class="weather-card-container">
         <div class="card">
           <h3 class="card-title">Температура: {{ getRealTimeTemperature(todayWeather.main.temp) | number:'1.0-0' }} °C</h3>
