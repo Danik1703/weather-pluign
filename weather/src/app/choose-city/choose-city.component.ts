@@ -24,33 +24,23 @@ export class ChooseCityComponent {
     this.loadingMessage = 'Оновлення погоди...';
     this.loading = true;
     this.weatherData = null;  
-    this.weatherService.getCurrentWeather(this.cityName)
-      .subscribe(
-        (data: WeatherData) => {
-          this.weatherData = data;
-          this.loading = false;
-          this.errorMessage = '';
-        },
-        (error: any) => {
-          this.errorMessage = 'Не вдалося знайти погоду для цього міста';
-          this.loading = false;
-          console.error(error);
-        }
-      );
+    this.loadWeatherData();  
   }
-  
+
   loadWeatherData() {
+    this.loading = true;
+
     if (this.view === 'today') {
-      this.getCurrentWeather();
+      this.getCurrentWeather();  
     } else {
-      this.getWeatherForecast();
+      this.getWeatherForecast(); 
     }
   }
-  
+
   onViewChange() {
     this.loadWeatherData();
   }
-  
+
   getCurrentWeather() {
     this.weatherService.getCurrentWeather(this.cityName)
       .subscribe(
@@ -72,7 +62,6 @@ export class ChooseCityComponent {
               }
             }]
           } as any;
-          this.errorMessage = '';
           this.loading = false;
           this.loadingMessage = '';  
         },
@@ -90,10 +79,13 @@ export class ChooseCityComponent {
       .subscribe(
         (data: WeatherData) => {
           this.weatherData = data;
-          this.errorMessage = '';
+          this.loading = false;
+          this.loadingMessage = '';
         },
         (error: any) => {
           this.errorMessage = 'Не вдалося знайти інформацію про погоду для зазначеного міста';
+          this.loading = false;
+          this.loadingMessage = '';  
           console.error(error);
         }
       );
@@ -104,12 +96,28 @@ export class ChooseCityComponent {
       navigator.geolocation.getCurrentPosition((position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-
+  
         if (this.view === 'today') {
           this.weatherService.getWeatherByCoordinates(latitude, longitude)
             .subscribe(
               (data: WeatherData) => {
-                this.weatherData = data;
+                this.weatherData = {
+                  city: {
+                    name: data.city?.name || '',  
+                    country: data.city?.country || ''
+                  },
+                  list: [{
+                    dt_txt: new Date().toISOString(),
+                    main: {
+                      temp: data.main?.temp || 0,
+                      humidity: data.main?.humidity || 0
+                    },
+                    weather: data.weather || [],
+                    wind: {
+                      speed: data.wind?.speed || 0
+                    }
+                  }]
+                } as any;
                 this.errorMessage = '';
               },
               (error: any) => {
@@ -129,7 +137,7 @@ export class ChooseCityComponent {
                 console.error(error);
               }
             );
-        }        
+        }
       }, (error) => {
         this.errorMessage = 'Не вдалося отримати ваше місцезнаходження';
         console.error(error);
@@ -137,5 +145,5 @@ export class ChooseCityComponent {
     } else {
       this.errorMessage = 'Геолокація не підтримується цим браузером.';
     }
-  }
-}
+  }  
+}  
