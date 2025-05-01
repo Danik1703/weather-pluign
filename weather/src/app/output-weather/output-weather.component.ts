@@ -15,26 +15,26 @@ export class OutputWeatherComponent implements OnChanges {
 
   cityInput: string = '';
 
-
   todayWeather: any;
+  forecastWeather: any;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['view'] || changes['weatherData']) {
-      this.loadData();
+      this.loadData(); 
     }
   }
 
   loadData(): void {
     if (this.view === 'today') {
       this.todayWeather = this.getTodayWeather();
+    } else if (this.view === '5days') {
+      this.forecastWeather = this.groupByDate(this.weatherData);
     }
   }
 
   getTodayWeather(): any {
     if (!this.weatherData?.list?.length) return null;
-  
     const now = new Date().getTime();
-  
     return this.weatherData.list.reduce((closest: any, current: any) => {
       const currentTime = new Date(current.dt_txt).getTime();
       const closestTime = new Date(closest.dt_txt).getTime();
@@ -48,16 +48,10 @@ export class OutputWeatherComponent implements OnChanges {
 
   getWeatherIcon(description: string): string {
     description = description.toLowerCase();
-  
-    if (description.includes('rain')) {
-      return 'assets/rain.png'; 
-    } else if (description.includes('clear')) {
-      return 'assets/sun.png'; 
-    } else if (description.includes('cloud')) {
-      return 'assets/cloud.png'; 
-    } else {
-      return 'assets/cloud.png'; 
-    }
+    if (description.includes('rain')) return 'assets/rain.png';
+    if (description.includes('clear')) return 'assets/sun.png';
+    if (description.includes('cloud')) return 'assets/cloud.png';
+    return 'assets/cloud.png'; 
   }
 
   groupByDate(weatherData: any): any[] {

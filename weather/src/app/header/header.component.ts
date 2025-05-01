@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+
+  getAsset(path: string): string {
+    return `assets${path}`;
+  }
+
 }

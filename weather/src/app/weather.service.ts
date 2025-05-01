@@ -7,7 +7,7 @@ import { WeatherData } from './weather-data.model';
   providedIn: 'root'
 })
 export class WeatherService {
-  private apiKey = '1b2e397bc6da86c01f1e9edb5b8b6c03'; 
+  private apiKey = '68e79a3f774da3ba4cb1d4bfcf7458a1'; 
   private weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
   private forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
 

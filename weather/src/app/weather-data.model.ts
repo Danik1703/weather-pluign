@@ -2,10 +2,6 @@ export interface WeatherData {
   wind: {
     speed: number;
   };
-  city: {
-    name: string;
-    country: string;
-  };
   main: {
     humidity: number;
     temp: number;
@@ -14,6 +10,13 @@ export interface WeatherData {
     description: string;
     icon: string;
   }[];
+  city?: { 
+    name: string;
+    country: string;
+  };
+  sys?: { 
+    country: string;
+  };
   list?: {
     dt_txt: string;
     main: {
