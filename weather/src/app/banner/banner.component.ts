@@ -28,10 +28,8 @@ export class BannerComponent implements OnInit, OnDestroy {
     this.slideIndex = (this.slideIndex % 7) + 1;
   }
 
-
-
-  getAsset(path: string): string {
-    return `assets${path}`;
+  getAsset(url: string): string {
+    return PlatformHelper.getAssetUrl() + url;
   }
 
   getBssImage(): string {

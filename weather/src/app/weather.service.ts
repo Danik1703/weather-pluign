@@ -32,5 +32,4 @@ export class WeatherService {
     const url = `${this.forecastApiUrl}?lat=${lat}&lon=${lon}&appid=${this.apiKey}`;
     return this.http.get<WeatherData>(url);
   }
-
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@
 import { WeatherData } from '../weather-data.model';
 import { Subscription } from 'rxjs';
 import { WeatherService } from '../weather.service';
+import { PlatformHelper } from '@natec/mef-dev-platform-connector';
 
 @Component({
   selector: 'app-output-weather',

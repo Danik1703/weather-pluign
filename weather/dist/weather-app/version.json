@@ -1,0 +1,13 @@
+{
+    "dirty": true,
+    "raw": "beaebe4-dirty",
+    "hash": "beaebe4",
+    "distance": null,
+    "tag": null,
+    "semver": null,
+    "suffix": "beaebe4-dirty",
+    "semverString": null,
+    "name": "weather-plugin",
+    "version": "1.0.2",
+    "main": "main.js"
+}

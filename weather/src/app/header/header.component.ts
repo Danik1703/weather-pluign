@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { PlatformHelper } from  '@natec/mef-dev-platform-connector';
+
+
 
 @Component({
   selector: 'app-header',
@@ -7,8 +10,8 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  getAsset(path: string): string {
-    return `assets${path}`;
+  getAsset(url: string): string {
+    return PlatformHelper.getAssetUrl() + url;
   }
-
 }
+
